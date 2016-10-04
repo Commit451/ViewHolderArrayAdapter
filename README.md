@@ -1,5 +1,5 @@
 # ViewHolderArrayAdapter
-ArrayAdapter for use with a Spinner which makes use of `ViewHolder`s from the RecyclerView API
+`ArrayAdapter` for use with a `Spinner` which makes use of `ViewHolder`s from the RecyclerView API
 
 [![Build Status](https://travis-ci.org/Commit451/ViewHolderArrayAdapter.svg?branch=master)](https://travis-ci.org/Commit451/ViewHolderArrayAdapter) [![](https://jitpack.io/v/Commit451/ViewHolderArrayAdapter.svg)](https://jitpack.io/#Commit451/ViewHolderArrayAdapter)
 
@@ -21,9 +21,37 @@ dependencies {
 
 # Usage
 See the sample project for full usage.
+Typically, you will subclass `ViewHolderArrayAdapter` similar to how you would subclass `RecyclerView.Adapter`
+```java
+public class CheeseSpinnerAdapter extends ViewHolderArrayAdapter<Cheese, CheeseViewHolder> {
 
-# But... Why?
-Many times, you might have ViewHolders defined that can be shared between Spinners and RecyclerViews. This bridges the gap
+    //Required constructor, annoying
+    public CheeseSpinnerAdapter(Context context, List<Cheese> objects) {
+        super(context, objects);
+    }
+
+    @Override
+    protected CheeseViewHolder onCreateViewHolder(ViewGroup parent) {
+        return CheeseViewHolder.inflate(parent);
+    }
+
+    @Override
+    protected void onBindViewHolder(CheeseViewHolder holder, Cheese item, int position) {
+        holder.bind(item);
+    }
+}
+```
+and setting the adapter on the spinner looks very typical:
+```java
+CheeseSpinnerAdapter adapter = new CheeseSpinnerAdapter(this, cheeses);
+spinner.setAdapter(adapter);
+```
+
+# Why ViewHolder?
+Many times, you might have `ViewHolder`s defined that can be shared between Spinners and RecyclerViews. This simple library bridges the gap.
+
+# Limitations
+Usage of ViewHolderArrayAdapter assumes that you want your Spinner dropdown items and the view you see when a selection is made to be the same.
 
 License
 --------
