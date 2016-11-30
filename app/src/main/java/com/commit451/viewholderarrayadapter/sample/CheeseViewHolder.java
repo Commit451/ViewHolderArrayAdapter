@@ -23,7 +23,7 @@ public class CheeseViewHolder extends RecyclerView.ViewHolder {
 
     public CheeseViewHolder(View view) {
         super(view);
-        title = (TextView) view.findViewById(R.id.text);
+        title = (TextView) view.findViewById(android.R.id.text1);
         image = (ImageView) view.findViewById(R.id.image);
     }
 

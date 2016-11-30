@@ -7,7 +7,7 @@ import android.widget.TextView;
 /**
  * Easy easy easy Text view view holder
  */
-class TextViewHolder extends RecyclerView.ViewHolder {
+class TextViewHolder<T> extends RecyclerView.ViewHolder {
 
     private TextView text;
 
@@ -16,7 +16,7 @@ class TextViewHolder extends RecyclerView.ViewHolder {
         text = (TextView) itemView.findViewById(android.R.id.text1);
     }
 
-    public void bind(Object object) {
+    public void bind(T object) {
         text.setText(object.toString());
     }
 }

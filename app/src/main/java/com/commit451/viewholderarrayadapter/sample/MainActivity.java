@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Spinner;
 
+import com.commit451.viewholderarrayadapter.TextViewHolderArrayAdapter;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +21,9 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Cheese> cheeses = load();
         CheeseSpinnerAdapter adapter = new CheeseSpinnerAdapter(this, cheeses);
         spinner.setAdapter(adapter);
+
+        Spinner textSpinner = (Spinner) findViewById(R.id.text_spinner);
+        textSpinner.setAdapter(new TextViewHolderArrayAdapter<>(this, R.layout.item_spinner_cheese, load()));
     }
 
     private ArrayList<Cheese> load() {

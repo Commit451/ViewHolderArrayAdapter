@@ -14,7 +14,7 @@ import java.util.List;
  * to a normal {@link android.widget.ArrayAdapter} you would use with a spinner, it expects that the custom
  * ViewHolder layout you provide at least contains a TextView with an id of android.R.id.text1
  */
-public class TextViewHolderArrayAdapter extends ViewHolderArrayAdapter<Object, TextViewHolder> {
+public class TextViewHolderArrayAdapter<T> extends ViewHolderArrayAdapter<T, TextViewHolder<T>> {
 
     @LayoutRes
     private int layoutRes = -1;
@@ -25,24 +25,24 @@ public class TextViewHolderArrayAdapter extends ViewHolderArrayAdapter<Object, T
      * @param layoutRes the custom layout resource. Make sure you have a {@link android.widget.TextView} with an id of android.R.id.text1
      * @param objects the items, which will get their title via {@link Object#toString()}
      */
-    public TextViewHolderArrayAdapter(Context context, @LayoutRes int layoutRes, List<Object> objects) {
+    public TextViewHolderArrayAdapter(Context context, @LayoutRes int layoutRes, List<T> objects) {
         super(context, objects);
         this.layoutRes = layoutRes;
     }
 
     @NonNull
     @Override
-    protected TextViewHolder onCreateViewHolder(@NonNull ViewGroup parent) {
+    protected TextViewHolder<T> onCreateViewHolder(@NonNull ViewGroup parent) {
         if (layoutRes == -1) {
             throw new IllegalStateException("You must provide a valid layout resource");
         }
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(layoutRes, parent, false);
-        return new TextViewHolder(view);
+        return new TextViewHolder<>(view);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull TextViewHolder holder, Object item, int position) {
+    protected void onBindViewHolder(@NonNull TextViewHolder<T> holder, T item, int position) {
         holder.bind(item);
     }
 }
