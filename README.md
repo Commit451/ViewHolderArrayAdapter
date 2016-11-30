@@ -15,7 +15,7 @@ and within your module's `build.gradle`
 
 ```gradle
 dependencies {
-    compile 'com.github.Commit451:ViewHolderArrayAdapter:0.0.1'
+    compile 'com.github.Commit451:ViewHolderArrayAdapter:insert.latest.version'
 }
 ```
 

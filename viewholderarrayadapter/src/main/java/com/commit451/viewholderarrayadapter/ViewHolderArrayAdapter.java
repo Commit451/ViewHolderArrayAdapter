@@ -1,7 +1,9 @@
 package com.commit451.viewholderarrayadapter;
 
 import android.content.Context;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +37,8 @@ public abstract class ViewHolderArrayAdapter<T, VH extends RecyclerView.ViewHold
      * @see android.support.v7.widget.RecyclerView.Adapter#onCreateViewHolder(ViewGroup, int)
      * @see #onBindViewHolder(RecyclerView.ViewHolder, Object, int)
      */
-    protected abstract VH onCreateViewHolder(ViewGroup parent);
+    @NonNull
+    protected abstract VH onCreateViewHolder(@NonNull ViewGroup parent);
 
     /**
      * Called by Spinner to display the data at the specified position. This method should
@@ -47,24 +50,35 @@ public abstract class ViewHolderArrayAdapter<T, VH extends RecyclerView.ViewHold
      * @param item The item that should be bound
      * @param position The position of the item within the adapter's data set.
      */
-    protected abstract void onBindViewHolder(VH holder, T item, int position);
+    protected abstract void onBindViewHolder(@NonNull VH holder, T item, int position);
 
     public ViewHolderArrayAdapter(Context context, List<T> objects) {
         super(context, 0, objects);
     }
 
     @Override
+    public void setDropDownViewResource(int resource) {
+        throwIt();
+    }
+
+    private void throwIt() {
+        throw new RuntimeException("This is not supported due to the need to use ViewHolders. You should extend this class and customize as needed.");
+    }
+
+    @CallSuper
+    @Override
     @NonNull
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         return getTheView(position, convertView, parent);
     }
 
+    @CallSuper
     @Override
     public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
         return getTheView(position, convertView, parent);
     }
 
-    private View getTheView(int position, View convertView, ViewGroup parent) {
+    private View getTheView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         T item = getItem(position);
         VH holder;
         if (convertView == null) {

@@ -1,6 +1,7 @@
 package com.commit451.viewholderarrayadapter.sample;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
 import com.commit451.viewholderarrayadapter.ViewHolderArrayAdapter;
@@ -16,13 +17,14 @@ public class CheeseSpinnerAdapter extends ViewHolderArrayAdapter<Cheese, CheeseV
         super(context, objects);
     }
 
+    @NonNull
     @Override
-    protected CheeseViewHolder onCreateViewHolder(ViewGroup parent) {
+    protected CheeseViewHolder onCreateViewHolder(@NonNull ViewGroup parent) {
         return CheeseViewHolder.inflate(parent);
     }
 
     @Override
-    protected void onBindViewHolder(CheeseViewHolder holder, Cheese item, int position) {
+    protected void onBindViewHolder(@NonNull CheeseViewHolder holder, Cheese item, int position) {
         holder.bind(item);
     }
 }
