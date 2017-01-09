@@ -14,49 +14,25 @@ import java.util.List;
  * to a normal {@link android.widget.ArrayAdapter} you would use with a spinner, it expects that the custom
  * ViewHolder layout you provide at least contains a TextView with an id of android.R.id.text1
  */
-public class TextViewHolderArrayAdapter<T> extends ViewHolderArrayAdapter<T, TextViewHolder<T>, TextViewHolder<T>> {
+public class TextSingleViewHolderArrayAdapter<T> extends SingleViewHolderArrayAdapter<T, TextViewHolder<T>> {
 
     @LayoutRes
     private int layoutRes = -1;
-    @LayoutRes
-    private int layoutDropdownRes = -1;
 
     /**
      * Construct an adapter with your provided data and custom layout resource
      * @param context context
      * @param layoutRes the custom layout resource. Make sure you have a {@link android.widget.TextView} with an id of android.R.id.text1
-     * @param dropdownLayoutRes the custom layout resource. Make sure you have a {@link android.widget.TextView} with an id of android.R.id.text1
      * @param objects the items, which will get their title via {@link Object#toString()}
      */
-    public TextViewHolderArrayAdapter(Context context, @LayoutRes int layoutRes, @LayoutRes int dropdownLayoutRes, List<T> objects) {
+    public TextSingleViewHolderArrayAdapter(Context context, @LayoutRes int layoutRes, List<T> objects) {
         super(context, objects);
         this.layoutRes = layoutRes;
-        this.layoutDropdownRes = dropdownLayoutRes;
     }
 
     @NonNull
     @Override
-    protected TextViewHolder<T> onCreateViewHolder(@NonNull ViewGroup parent) {
-        return createHolder(parent, layoutRes);
-    }
-
-    @NonNull
-    @Override
-    protected TextViewHolder<T> onCreateDropDownViewHolder(@NonNull ViewGroup parent) {
-        return createHolder(parent, layoutDropdownRes);
-    }
-
-    @Override
-    protected void onBindViewHolder(@NonNull TextViewHolder<T> holder, T t, int position) {
-        holder.bind(t);
-    }
-
-    @Override
-    protected void onBindDropDownViewHolder(@NonNull TextViewHolder<T> holder, T t, int position) {
-        holder.bind(t);
-    }
-
-    private TextViewHolder<T> createHolder(@NonNull ViewGroup parent, @LayoutRes int layoutRes) {
+    protected TextViewHolder<T> onCreateSingleViewHolder(@NonNull ViewGroup parent) {
         if (layoutRes == -1) {
             throw new IllegalStateException("You must provide a valid layout resource");
         }
@@ -67,5 +43,10 @@ public class TextViewHolderArrayAdapter<T> extends ViewHolderArrayAdapter<T, Tex
             throw new IllegalArgumentException("The layout you provide must have a TextView with a layout id of android.R.id.text1");
         }
         return holder;
+    }
+
+    @Override
+    protected void onBindSingleViewHolder(@NonNull TextViewHolder<T> holder, T item, int position) {
+        holder.bind(item);
     }
 }

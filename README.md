@@ -30,13 +30,25 @@ public class CheeseSpinnerAdapter extends ViewHolderArrayAdapter<Cheese, CheeseV
         super(context, objects);
     }
 
+    @NonNull
     @Override
-    protected CheeseViewHolder onCreateViewHolder(ViewGroup parent) {
+    protected CheeseViewHolder onCreateViewHolder(@NonNull ViewGroup parent) {
         return CheeseViewHolder.inflate(parent);
     }
 
+    @NonNull
     @Override
-    protected void onBindViewHolder(CheeseViewHolder holder, Cheese item, int position) {
+    protected CheeseDropDownViewHolder onCreateDropDownViewHolder(@NonNull ViewGroup parent) {
+        return CheeseDropDownViewHolder.inflate(parent);
+    }
+
+    @Override
+    protected void onBindViewHolder(@NonNull CheeseViewHolder holder, Cheese item, int position) {
+        holder.bind(item);
+    }
+
+    @Override
+    protected void onBindDropDownViewHolder(@NonNull CheeseDropDownViewHolder holder, Cheese item, int position) {
         holder.bind(item);
     }
 }
@@ -47,8 +59,40 @@ CheeseSpinnerAdapter adapter = new CheeseSpinnerAdapter(this, cheeses);
 spinner.setAdapter(adapter);
 ```
 
+If you want to use the same `ViewHolder` for both the dropdown and the selected item:
+```java
+public class CheeseSingleAdapter extends SingleViewHolderArrayAdapter<Cheese, CheeseViewHolder> {
+
+    public CheeseSingleAdapter(Context context, List<Cheese> objects) {
+        super(context, objects);
+    }
+
+    @NonNull
+    @Override
+    protected CheeseViewHolder onCreateSingleViewHolder(@NonNull ViewGroup parent) {
+        return CheeseViewHolder.inflate(parent);
+    }
+
+    @Override
+    protected void onBindSingleViewHolder(@NonNull CheeseViewHolder holder, Cheese item, int position) {
+        holder.bind(item);
+    }
+}
+```
+
+And if you have a simple view where only the text changes, you can use `TextViewHolderArrayAdapter`:
+```java
+Spinner textSpinner = (Spinner) findViewById(R.id.text_spinner);
+textSpinner.setAdapter(new TextViewHolderArrayAdapter<>(this, R.layout.item_spinner_cheese, R.layout.item_spinner_dropdown_cheese, cheeses));
+```
+And similarly, if they share the same `ViewHolder`:
+```java
+Spinner textSingleSpinner = (Spinner) findViewById(R.id.text_single_spinner);
+textSingleSpinner.setAdapter(new TextSingleViewHolderArrayAdapter<>(this, R.layout.item_spinner_cheese, cheeses));
+```
+
 # Why ViewHolder?
-Many times, you might have `ViewHolder`s defined that can be shared between Spinners and RecyclerViews. This simple library bridges the gap.
+Many times, you might have `ViewHolder`s defined that can be shared between Spinners and RecyclerViews. This simple library bridges the gap. Also using `ViewHolder` is more efficient, as it forces recycling for spinners which can otherwise be overlooked.
 
 # Limitations
 Usage of ViewHolderArrayAdapter assumes that you want your Spinner dropdown items and the view you see when a selection is made to be the same.
