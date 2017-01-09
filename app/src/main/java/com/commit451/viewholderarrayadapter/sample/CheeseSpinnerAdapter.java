@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Example usage of {@link ViewHolderArrayAdapter}
  */
-public class CheeseSpinnerAdapter extends ViewHolderArrayAdapter<Cheese, CheeseViewHolder> {
+public class CheeseSpinnerAdapter extends ViewHolderArrayAdapter<Cheese, CheeseViewHolder, CheeseDropDownViewHolder> {
 
     public CheeseSpinnerAdapter(Context context, List<Cheese> objects) {
         super(context, objects);
@@ -23,8 +23,19 @@ public class CheeseSpinnerAdapter extends ViewHolderArrayAdapter<Cheese, CheeseV
         return CheeseViewHolder.inflate(parent);
     }
 
+    @NonNull
+    @Override
+    protected CheeseDropDownViewHolder onCreateDropDownViewHolder(@NonNull ViewGroup parent) {
+        return CheeseDropDownViewHolder.inflate(parent);
+    }
+
     @Override
     protected void onBindViewHolder(@NonNull CheeseViewHolder holder, Cheese item, int position) {
+        holder.bind(item);
+    }
+
+    @Override
+    protected void onBindDropDownViewHolder(@NonNull CheeseDropDownViewHolder holder, Cheese item, int position) {
         holder.bind(item);
     }
 }

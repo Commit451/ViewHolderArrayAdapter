@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="view_holder_array_adapter_id" type="id"/>
+    <item name="view_holder_array_adapter_holder" type="id"/>
+    <item name="view_holder_array_adapter_position" type="id"/>
 </resources>

@@ -14,7 +14,7 @@ import java.util.List;
  * to a normal {@link android.widget.ArrayAdapter} you would use with a spinner, it expects that the custom
  * ViewHolder layout you provide at least contains a TextView with an id of android.R.id.text1
  */
-public class TextViewHolderArrayAdapter<T> extends ViewHolderArrayAdapter<T, TextViewHolder<T>> {
+public class TextViewHolderArrayAdapter<T> extends SingleViewHolderArrayAdapter<T, TextViewHolder<T>> {
 
     @LayoutRes
     private int layoutRes = -1;
@@ -32,17 +32,21 @@ public class TextViewHolderArrayAdapter<T> extends ViewHolderArrayAdapter<T, Tex
 
     @NonNull
     @Override
-    protected TextViewHolder<T> onCreateViewHolder(@NonNull ViewGroup parent) {
+    protected TextViewHolder<T> onCreateSingleViewHolder(@NonNull ViewGroup parent) {
         if (layoutRes == -1) {
             throw new IllegalStateException("You must provide a valid layout resource");
         }
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(layoutRes, parent, false);
-        return new TextViewHolder<>(view);
+        TextViewHolder<T> holder = new TextViewHolder<>(view);
+        if (holder.text == null) {
+            throw new IllegalArgumentException("The layout you provide must have a TextView with a layout id of android.R.id.text1");
+        }
+        return holder;
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull TextViewHolder<T> holder, T item, int position) {
+    protected void onBindSingleViewHolder(@NonNull TextViewHolder<T> holder, T item, int position) {
         holder.bind(item);
     }
 }

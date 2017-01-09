@@ -9,7 +9,7 @@ import android.widget.TextView;
  */
 class TextViewHolder<T> extends RecyclerView.ViewHolder {
 
-    private TextView text;
+    public TextView text;
 
     TextViewHolder(View itemView) {
         super(itemView);
