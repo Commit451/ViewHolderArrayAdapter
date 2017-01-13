@@ -94,9 +94,6 @@ textSingleSpinner.setAdapter(new TextSingleViewHolderArrayAdapter<>(this, R.layo
 # Why ViewHolder?
 Many times, you might have `ViewHolder`s defined that can be shared between Spinners and RecyclerViews. This simple library bridges the gap. Also using `ViewHolder` is more efficient, as it forces recycling for spinners which can otherwise be overlooked.
 
-# Limitations
-Usage of ViewHolderArrayAdapter assumes that you want your Spinner dropdown items and the view you see when a selection is made to be the same.
-
 License
 --------
 
