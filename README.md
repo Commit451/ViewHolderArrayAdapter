@@ -1,5 +1,5 @@
 # ViewHolderArrayAdapter
-`ArrayAdapter` for use with a `Spinner` which makes use of `ViewHolder`s from the RecyclerView API
+`ArrayAdapter` for use in replacement of `ArrayAdapter` which makes use of `ViewHolder`s from the RecyclerView API
 
 [![Build Status](https://travis-ci.org/Commit451/ViewHolderArrayAdapter.svg?branch=master)](https://travis-ci.org/Commit451/ViewHolderArrayAdapter) [![](https://jitpack.io/v/Commit451/ViewHolderArrayAdapter.svg)](https://jitpack.io/#Commit451/ViewHolderArrayAdapter)
 
@@ -91,13 +91,18 @@ Spinner textSingleSpinner = (Spinner) findViewById(R.id.text_single_spinner);
 textSingleSpinner.setAdapter(new TextSingleViewHolderArrayAdapter<>(this, R.layout.item_spinner_cheese, cheeses));
 ```
 
+ViewHolderArrayAdapter is not just limited to Spinners, though that is what it was originally designed for. All in all, you could use it with:
+- Spinner
+- AutoCompleteTextView
+- ListView (please don't use ListView)
+
 # Why ViewHolder?
 Many times, you might have `ViewHolder`s defined that can be shared between Spinners and RecyclerViews. This simple library bridges the gap. Also using `ViewHolder` is more efficient, as it forces recycling for spinners which can otherwise be overlooked.
 
 License
 --------
 
-    Copyright 2016 Commit 451
+    Copyright 2017 Commit 451
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

@@ -50,4 +50,10 @@
         android:id="@+id/text_single_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <AutoCompleteTextView
+        android:id="@+id/text_autocomplete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Search for cheeses"/>
 </LinearLayout>

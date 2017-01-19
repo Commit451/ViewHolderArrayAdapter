@@ -2,6 +2,7 @@ package com.commit451.viewholderarrayadapter.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
 
 import com.commit451.viewholderarrayadapter.TextSingleViewHolderArrayAdapter;
@@ -30,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
         Spinner textSingleSpinner = (Spinner) findViewById(R.id.text_single_spinner);
         textSingleSpinner.setAdapter(new TextSingleViewHolderArrayAdapter<>(this, R.layout.item_spinner_cheese, cheeses));
+
+        AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.text_autocomplete);
+        autoCompleteTextView.setAdapter(new CheeseSingleAdapter(this, cheeses));
     }
 
     private ArrayList<Cheese> load() {
