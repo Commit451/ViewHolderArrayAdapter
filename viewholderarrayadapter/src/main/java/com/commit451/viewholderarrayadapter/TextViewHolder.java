@@ -13,7 +13,7 @@ class TextViewHolder<T> extends RecyclerView.ViewHolder {
 
     TextViewHolder(View itemView) {
         super(itemView);
-        text = (TextView) itemView.findViewById(android.R.id.text1);
+        text = itemView.findViewById(android.R.id.text1);
     }
 
     public void bind(T object) {
