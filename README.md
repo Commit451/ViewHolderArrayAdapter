@@ -1,5 +1,5 @@
 # ViewHolderArrayAdapter
-`ArrayAdapter` for use in replacement of `ArrayAdapter` which makes use of `ViewHolder`s from the RecyclerView API
+A replacement of `ArrayAdapter` which makes use of `ViewHolder`s from the RecyclerView API.
 
 [![Build Status](https://travis-ci.org/Commit451/ViewHolderArrayAdapter.svg?branch=master)](https://travis-ci.org/Commit451/ViewHolderArrayAdapter) [![](https://jitpack.io/v/Commit451/ViewHolderArrayAdapter.svg)](https://jitpack.io/#Commit451/ViewHolderArrayAdapter)
 
@@ -21,75 +21,26 @@ dependencies {
 
 # Usage
 See the sample project for full usage.
-Typically, you will subclass `ViewHolderArrayAdapter` similar to how you would subclass `RecyclerView.Adapter`
-```java
-public class CheeseSpinnerAdapter extends ViewHolderArrayAdapter<Cheese, CheeseViewHolder> {
-
-    //Required constructor, annoying
-    public CheeseSpinnerAdapter(Context context, List<Cheese> objects) {
-        super(context, objects);
-    }
-
-    @NonNull
-    @Override
-    protected CheeseViewHolder onCreateViewHolder(@NonNull ViewGroup parent) {
-        return CheeseViewHolder.inflate(parent);
-    }
-
-    @NonNull
-    @Override
-    protected CheeseDropDownViewHolder onCreateDropDownViewHolder(@NonNull ViewGroup parent) {
-        return CheeseDropDownViewHolder.inflate(parent);
-    }
-
-    @Override
-    protected void onBindViewHolder(@NonNull CheeseViewHolder holder, Cheese item, int position) {
-        holder.bind(item);
-    }
-
-    @Override
-    protected void onBindDropDownViewHolder(@NonNull CheeseDropDownViewHolder holder, Cheese item, int position) {
-        holder.bind(item);
-    }
-}
-```
-and setting the adapter on the spinner looks very typical:
-```java
-CheeseSpinnerAdapter adapter = new CheeseSpinnerAdapter(this, cheeses);
-spinner.setAdapter(adapter);
+Typically, you will create a `ViewHolderArrayAdapter`:
+```kotlin
+val spinner = findViewById<Spinner>(R.id.spinner)
+val adapter = ViewHolderArrayAdapter(this, cheeses, { parent ->
+    //create the overall view holder
+    CheeseViewHolder.inflate(parent)
+}, { parent ->
+    //create the dropdown view holder
+    CheeseDropDownViewHolder.inflate(parent)
+}, { viewHolder, position, item ->
+    //bind the overall view holder
+    viewHolder.bind(item)
+}, { viewHolder, position, item ->
+    //bind the dropdown view holder
+    viewHolder.bind(item)
+})
+spinner.adapter = adapter
 ```
 
-If you want to use the same `ViewHolder` for both the dropdown and the selected item:
-```java
-public class CheeseSingleAdapter extends SingleViewHolderArrayAdapter<Cheese, CheeseViewHolder> {
-
-    public CheeseSingleAdapter(Context context, List<Cheese> objects) {
-        super(context, objects);
-    }
-
-    @NonNull
-    @Override
-    protected CheeseViewHolder onCreateSingleViewHolder(@NonNull ViewGroup parent) {
-        return CheeseViewHolder.inflate(parent);
-    }
-
-    @Override
-    protected void onBindSingleViewHolder(@NonNull CheeseViewHolder holder, Cheese item, int position) {
-        holder.bind(item);
-    }
-}
-```
-
-And if you have a simple view where only the text changes, you can use `TextViewHolderArrayAdapter`:
-```java
-Spinner textSpinner = (Spinner) findViewById(R.id.text_spinner);
-textSpinner.setAdapter(new TextViewHolderArrayAdapter<>(this, R.layout.item_spinner_cheese, R.layout.item_spinner_dropdown_cheese, cheeses));
-```
-And similarly, if they share the same `ViewHolder`:
-```java
-Spinner textSingleSpinner = (Spinner) findViewById(R.id.text_single_spinner);
-textSingleSpinner.setAdapter(new TextSingleViewHolderArrayAdapter<>(this, R.layout.item_spinner_cheese, cheeses));
-```
+If you want to use the same `ViewHolder` for both the dropdown and the selected item, you can use `SingleViewHolderArrayAdapter`. And if you have a simple view where only the text changes, you can use `TextViewHolderArrayAdapter`, or `SingleTextViewHolderArrayAdapter`
 
 ViewHolderArrayAdapter is not just limited to Spinners, though that is what it was originally designed for. All in all, you could use it with:
 - Spinner
