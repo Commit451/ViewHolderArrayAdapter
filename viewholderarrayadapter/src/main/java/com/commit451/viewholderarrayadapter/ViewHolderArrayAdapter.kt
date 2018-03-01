@@ -69,6 +69,7 @@ open class ViewHolderArrayAdapter<T, VH : RecyclerView.ViewHolder, DVH : Recycle
         } else {
             //no need to worry, we are the only ones setting this tag
 
+            @Suppress("UNCHECKED_CAST")
             holder = convertView.getTag(R.id.view_holder_array_adapter_holder) as VH
         }
         onBindViewHolder.invoke(holder, position, item)
@@ -85,6 +86,7 @@ open class ViewHolderArrayAdapter<T, VH : RecyclerView.ViewHolder, DVH : Recycle
         } else {
             //no need to worry, we are the only ones setting this tag
 
+            @Suppress("UNCHECKED_CAST")
             holder = convertView.getTag(R.id.view_holder_array_adapter_holder) as DVH
         }
         holder.itemView.setTag(R.id.view_holder_array_adapter_position, position)

@@ -3,7 +3,6 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.ext.sdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "com.commit451.viewholderarrayadapter.sample"
         minSdkVersion 15
@@ -24,11 +23,9 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:$supportLibVersion"
 
-    compile "com.android.support:appcompat-v7:$supportLibVersion"
-
-    compile project(':viewholderarrayadapter')
+    implementation project(':viewholderarrayadapter')
 }
