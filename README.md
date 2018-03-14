@@ -15,7 +15,7 @@ and within your module's `build.gradle`
 
 ```gradle
 dependencies {
-    compile 'com.github.Commit451:ViewHolderArrayAdapter:insert.latest.version'
+    implementation 'com.github.Commit451:ViewHolderArrayAdapter:insert.latest.version'
 }
 ```
 
@@ -53,7 +53,7 @@ Many times, you might have `ViewHolder`s defined that can be shared between Spin
 License
 --------
 
-    Copyright 2017 Commit 451
+    Copyright 2018 Commit 451
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

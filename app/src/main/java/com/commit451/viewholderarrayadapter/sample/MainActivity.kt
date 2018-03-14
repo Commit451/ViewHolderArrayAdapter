@@ -2,7 +2,6 @@ package com.commit451.viewholderarrayadapter.sample
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.View
 import android.widget.AutoCompleteTextView
 import android.widget.Spinner
 import com.commit451.viewholderarrayadapter.SingleTextViewHolderArrayAdapter
@@ -33,13 +32,13 @@ class MainActivity : AppCompatActivity() {
         val singleSpinner = findViewById<Spinner>(R.id.single_spinner)
         singleSpinner.adapter = CheeseSingleAdapter(this, cheeses)
 
-        val textSpinner = findViewById<View>(R.id.text_spinner) as Spinner
+        val textSpinner = findViewById<Spinner>(R.id.text_spinner)
         textSpinner.adapter = TextViewHolderArrayAdapter(this, R.layout.item_spinner_cheese, R.layout.item_spinner_dropdown_cheese, cheeses)
 
-        val textSingleSpinner = findViewById<View>(R.id.text_single_spinner) as Spinner
+        val textSingleSpinner = findViewById<Spinner>(R.id.text_single_spinner)
         textSingleSpinner.adapter = SingleTextViewHolderArrayAdapter(this, R.layout.item_spinner_cheese, cheeses)
 
-        val autoCompleteTextView = findViewById<View>(R.id.text_autocomplete) as AutoCompleteTextView
+        val autoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.text_autocomplete)
         autoCompleteTextView.setAdapter(CheeseSingleAdapter(this, cheeses))
     }
 
