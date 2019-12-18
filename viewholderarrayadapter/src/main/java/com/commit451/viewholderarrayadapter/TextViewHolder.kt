@@ -1,8 +1,8 @@
 package com.commit451.viewholderarrayadapter
 
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * Easy easy easy Text view view holder holder

@@ -1,7 +1,7 @@
 package com.commit451.viewholderarrayadapter
 
 import android.content.Context
-import android.support.annotation.LayoutRes
+import androidx.annotation.LayoutRes
 
 /**
  * Simple implementation which calls the [Object.toString] on whatever object is passed. Similar

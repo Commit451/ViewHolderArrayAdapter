@@ -1,21 +1,24 @@
 package com.commit451.viewholderarrayadapter
 
 import android.content.Context
-import android.support.annotation.CallSuper
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.annotation.CallSuper
+import androidx.recyclerview.widget.RecyclerView
 
 /**
- * Uses the magic of [android.support.v7.widget.RecyclerView.ViewHolder]s with
+ * Uses the magic of [RecyclerView.ViewHolder]s with
  * [ArrayAdapter] to make great Spinner adapters
  */
-open class ViewHolderArrayAdapter<T, VH : RecyclerView.ViewHolder, DVH : RecyclerView.ViewHolder>(context: Context, objects: List<T>,
-                                                                                                      private val onCreateViewHolder: (parent: ViewGroup) -> VH,
-                                                                                                      private val onCreateDropDownViewHolder: (parent: ViewGroup) -> DVH,
-                                                                                                      private val onBindViewHolder: (viewHolder: VH, position: Int, item: T) -> Unit,
-                                                                                                      private val onBindDropDownViewHolder: (viewHolder: DVH, position: Int, item: T) -> Unit) : ArrayAdapter<T>(context, 0, objects) {
+open class ViewHolderArrayAdapter<T, VH : RecyclerView.ViewHolder, DVH : RecyclerView.ViewHolder>(
+    context: Context,
+    objects: List<T>,
+    private val onCreateViewHolder: (parent: ViewGroup) -> VH,
+    private val onCreateDropDownViewHolder: (parent: ViewGroup) -> DVH,
+    private val onBindViewHolder: (viewHolder: VH, position: Int, item: T) -> Unit,
+    private val onBindDropDownViewHolder: (viewHolder: DVH, position: Int, item: T) -> Unit
+) : ArrayAdapter<T>(context, 0, objects) {
 
     companion object {
 
@@ -61,7 +64,7 @@ open class ViewHolderArrayAdapter<T, VH : RecyclerView.ViewHolder, DVH : Recycle
 
     @CallSuper
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val item = getItem(position)
+        val item = getItem(position)!!
         val holder: VH
         if (convertView == null) {
             holder = onCreateViewHolder(parent)
@@ -78,7 +81,7 @@ open class ViewHolderArrayAdapter<T, VH : RecyclerView.ViewHolder, DVH : Recycle
 
     @CallSuper
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val item = getItem(position)
+        val item = getItem(position)!!
         val holder: DVH
         if (convertView == null) {
             holder = onCreateDropDownViewHolder(parent)

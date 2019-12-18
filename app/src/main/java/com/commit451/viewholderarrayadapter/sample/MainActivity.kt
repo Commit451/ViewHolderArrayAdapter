@@ -1,9 +1,9 @@
 package com.commit451.viewholderarrayadapter.sample
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.widget.AutoCompleteTextView
 import android.widget.Spinner
+import androidx.appcompat.app.AppCompatActivity
 import com.commit451.viewholderarrayadapter.SingleTextViewHolderArrayAdapter
 import com.commit451.viewholderarrayadapter.TextViewHolderArrayAdapter
 import com.commit451.viewholderarrayadapter.ViewHolderArrayAdapter
