@@ -24,19 +24,26 @@ See the sample project for full usage.
 Typically, you will create a `ViewHolderArrayAdapter`:
 ```kotlin
 val spinner = findViewById<Spinner>(R.id.spinner)
-val adapter = ViewHolderArrayAdapter(this, cheeses, { parent ->
-    //create the overall view holder
-    CheeseViewHolder.inflate(parent)
-}, { parent ->
-    //create the dropdown view holder
-    CheeseDropDownViewHolder.inflate(parent)
-}, { viewHolder, position, item ->
-    //bind the overall view holder
-    viewHolder.bind(item)
-}, { viewHolder, position, item ->
-    //bind the dropdown view holder
-    viewHolder.bind(item)
-})
+val adapter = ViewHolderArrayAdapter(
+    context = this,
+    objects = cheeses,
+    onCreateViewHolder = { parent ->
+        // create the overall view holder
+        CheeseViewHolder.inflate(parent)
+    },
+    onCreateDropDownViewHolder = { parent ->
+        // create the dropdown view holder
+        CheeseDropDownViewHolder.inflate(parent)
+    },
+    onBindViewHolder = { viewHolder, position, item ->
+        // bind the overall view holder
+        viewHolder.bind(item)
+    },
+    onBindDropDownViewHolder = { viewHolder, position, item ->
+        // bind the dropdown view holder
+        viewHolder.bind(item)
+    }
+)
 spinner.adapter = adapter
 ```
 
@@ -53,7 +60,7 @@ Many times, you might have `ViewHolder`s defined that can be shared between Spin
 License
 --------
 
-    Copyright 2018 Commit 451
+    Copyright 2020 Commit 451
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

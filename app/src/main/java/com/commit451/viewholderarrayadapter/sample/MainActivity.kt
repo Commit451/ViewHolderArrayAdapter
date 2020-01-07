@@ -18,15 +18,22 @@ class MainActivity : AppCompatActivity() {
         val cheeses = load()
 
         val spinner = findViewById<Spinner>(R.id.spinner)
-        val adapter = ViewHolderArrayAdapter(this, cheeses, { parent ->
-            CheeseViewHolder.inflate(parent)
-        }, { parent ->
-            CheeseDropDownViewHolder.inflate(parent)
-        }, { viewHolder, position, item ->
-            viewHolder.bind(item)
-        }, { viewHolder, position, item ->
-            viewHolder.bind(item)
-        })
+        val adapter = ViewHolderArrayAdapter(
+            context = this,
+            objects = cheeses,
+            onCreateViewHolder = { parent ->
+                CheeseViewHolder.inflate(parent)
+            },
+            onCreateDropDownViewHolder = { parent ->
+                CheeseDropDownViewHolder.inflate(parent)
+            },
+            onBindViewHolder = { viewHolder, _, item ->
+                viewHolder.bind(item)
+            },
+            onBindDropDownViewHolder = { viewHolder, _, item ->
+                viewHolder.bind(item)
+            }
+        )
         spinner.adapter = adapter
 
         val singleSpinner = findViewById<Spinner>(R.id.single_spinner)
